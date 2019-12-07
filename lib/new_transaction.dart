@@ -29,7 +29,7 @@ class _newTransactionState extends State<newTransaction> {
   void _add(double ammount , String title)
   {
     setState(() {
-      Transactions._(DataModel(
+      Transactions.add(DataModel(
       id: Transactions.length.toString(),
       amount: ammount.toDouble(),
       title: title,

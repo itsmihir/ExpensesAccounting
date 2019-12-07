@@ -25,7 +25,9 @@ class MyHomePage extends StatelessWidget {
          ),
 
 
-      body: Column(
+      body: SingleChildScrollView(
+
+      child:Column(
 
         //mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -36,7 +38,7 @@ class MyHomePage extends StatelessWidget {
         newTransaction(), 
         ],
       )
-
+      )
       );
     
   }

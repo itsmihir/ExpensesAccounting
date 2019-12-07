@@ -20,7 +20,11 @@ class _DataState extends State<Data> {
   _DataState(this.Transactions);
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+      height:400,
+    child:SingleChildScrollView( 
+    
+    child : Column(
 
               children : Transactions.map((data){
               
@@ -77,6 +81,8 @@ class _DataState extends State<Data> {
                 ],)
                 );
               }).toList(),
+    )
+    )
           );
 
   }

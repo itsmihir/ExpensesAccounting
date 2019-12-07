@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Input extends StatelessWidget {
-  String ammountInput , titleInput;
+  final ammountInput = TextEditingController();
+  final titleInput = TextEditingController();
   final add;
 
   Input(this.add);
@@ -23,16 +24,18 @@ class Input extends StatelessWidget {
         TextField(decoration: InputDecoration(
           labelText: 'Title',
           ),
-          onChanged: (String val){ 
-            titleInput = val;
-          },
+          controller: titleInput,
+          // onChanged: (String val){ 
+          //   titleInput = val;
+          // },
           ),
         TextField(decoration: InputDecoration(
           labelText: 'Ammount'
         ),
-        onChanged: (String val){
-          ammountInput = val;
-        },
+        controller: ammountInput,
+        // onChanged: (String val){
+        //   ammountInput = val;
+        // },
         ),
 
         FlatButton(
@@ -40,7 +43,8 @@ class Input extends StatelessWidget {
           onPressed: (){
             // print(titleInput);
             // print(ammountInput);
-            add(ammountInput,titleInput);
+            add(double.parse(ammountInput.text),titleInput.text);
+            
           },
           textColor: Colors.purple,
           )
