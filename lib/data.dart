@@ -22,12 +22,9 @@ class _DataState extends State<Data> {
   Widget build(BuildContext context) {
     return Container(
       height:400,
-    child:SingleChildScrollView( 
-    
-    child : Column(
-
-              children : Transactions.map((data){
-              
+      child:ListView.builder(
+            itemCount: Transactions.length,
+            itemBuilder: (context,index) {
                 return Card( 
                 child : Row(children: <Widget>[
                 
@@ -45,7 +42,7 @@ class _DataState extends State<Data> {
 
                 padding: EdgeInsets.all(10),
               
-                child: Text('₹${data.amount}' ,
+                child: Text('₹${Transactions[index].amount.toStringAsFixed(2)}' ,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -61,7 +58,7 @@ class _DataState extends State<Data> {
 
                   children: <Widget>[
                   
-                  Text(data.title , 
+                  Text(Transactions[index].title , 
                    style: TextStyle( fontSize: 15,
                    fontWeight: FontWeight.bold,
                   ),
@@ -69,7 +66,7 @@ class _DataState extends State<Data> {
                   
                   
                   Text(
-                    DateFormat.yMd().add_jm().format(data.date),
+                    DateFormat.yMd().add_jm().format(Transactions[index].date),
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 12
@@ -80,10 +77,10 @@ class _DataState extends State<Data> {
 
                 ],)
                 );
-              }).toList(),
-    )
-    )
-          );
+            },
+              
+          )
+    );
 
   }
 }

@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class Input extends StatelessWidget {
+class Input extends StatefulWidget {
+  final add;
+  Input(this.add);
+  @override
+  _InputState createState() => _InputState();
+}
+
+class _InputState extends State<Input> {
+  
   final ammountInput = TextEditingController();
   final titleInput = TextEditingController();
-  final add;
+  
+  _InputState();
 
-  Input(this.add);
+
+  void submitData()
+  { 
+    if(double.parse(ammountInput.text)<0 || titleInput.text=='')
+    return ;
+
+    widget.add(double.parse(ammountInput.text),titleInput.text);
+
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +44,18 @@ class Input extends StatelessWidget {
           labelText: 'Title',
           ),
           controller: titleInput,
-          // onChanged: (String val){ 
-          //   titleInput = val;
-          // },
           ),
         TextField(decoration: InputDecoration(
           labelText: 'Ammount'
         ),
         controller: ammountInput,
-        // onChanged: (String val){
-        //   ammountInput = val;
-        // },
+         keyboardType: TextInputType.number,
+      
         ),
 
         FlatButton(
           child: Text('Add Transaction'),
-          onPressed: (){
-            // print(titleInput);
-            // print(ammountInput);
-            add(double.parse(ammountInput.text),titleInput.text);
-            
-          },
+          onPressed: submitData,
           textColor: Colors.purple,
           )
       ],
@@ -54,3 +64,4 @@ class Input extends StatelessWidget {
     );
 }
 }
+
