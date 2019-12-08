@@ -20,7 +20,20 @@ class _DataState extends State<Data> {
   _DataState(this.Transactions);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Transactions.length==0?
+    Column(children: <Widget>[
+      Text('No Transactions added yet!',
+      style: Theme.of(context).textTheme.title,
+      ),
+      
+      SizedBox(height: 20,), // to add space between text and the image
+      
+      Container(
+      height: 200,
+      child:Image.asset('assets/images/waiting.png',fit: BoxFit.cover,),
+      )
+    ],)
+      : Container(
       height:400,
       child:ListView.builder(
             itemCount: Transactions.length,
@@ -43,11 +56,7 @@ class _DataState extends State<Data> {
                 padding: EdgeInsets.all(10),
               
                 child: Text('₹${Transactions[index].amount.toStringAsFixed(2)}' ,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.purple,
-                  ),
+                  style: Theme.of(context).textTheme.title,
                 ),
 
                 ),
@@ -59,9 +68,7 @@ class _DataState extends State<Data> {
                   children: <Widget>[
                   
                   Text(Transactions[index].title , 
-                   style: TextStyle( fontSize: 15,
-                   fontWeight: FontWeight.bold,
-                  ),
+                   style: Theme.of(context).textTheme.title,
                    ),
                   
                   

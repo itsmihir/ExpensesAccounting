@@ -11,6 +11,31 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Expenses Accounting',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        fontFamily: 'QuickSand',
+       
+       // global text theme 
+        textTheme: ThemeData.light().textTheme.copyWith(
+          title: TextStyle(
+            fontSize: 18,
+            fontFamily: 'OpenSans',
+
+          
+          )
+        ),
+
+        //global appbar theme
+        appBarTheme: AppBarTheme(
+              textTheme: ThemeData.light().textTheme.copyWith(title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )
+            )
+        )
+      ),
+      
       home:MyHomepage(),
     );
   }
@@ -58,19 +83,19 @@ class _MyHomepageState extends State<MyHomepage> {
   }
 
     final List<DataModel> Transactions = [
-    DataModel(
-      id:'1',
-      title:'Movies',
-      amount:200,
-      date:DateTime.now()
-    ),
+    // DataModel(
+    //   id:'1',
+    //   title:'Movies',
+    //   amount:200,
+    //   date:DateTime.now()
+    // ),
 
-    DataModel(
-      id:'2',
-      title:'Internet',
-      amount:1000,
-      date:DateTime.now()
-    )
+    // DataModel(
+    //   id:'2',
+    //   title:'Internet',
+    //   amount:1000,
+    //   date:DateTime.now()
+    // )
   ];
 
   
