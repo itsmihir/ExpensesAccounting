@@ -18,6 +18,17 @@ class _DataState extends State<Data> {
   final List<DataModel> Transactions;
 
   _DataState(this.Transactions);
+
+  void _deleteTransaction(String id)
+  {
+    setState(() {
+    Transactions.removeWhere((data){
+      return data.id==id;
+    });
+    
+    });
+    }
+
   @override
   Widget build(BuildContext context) {
     return Transactions.length==0?
@@ -33,61 +44,47 @@ class _DataState extends State<Data> {
       child:Image.asset('assets/images/waiting.png',fit: BoxFit.cover,),
       )
     ],)
-      : Container(
-      height:400,
+      : 
+      Container(
+      height:450,
       child:ListView.builder(
             itemCount: Transactions.length,
             itemBuilder: (context,index) {
-                return Card( 
-                child : Row(children: <Widget>[
-                
-                Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20,
-                ),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                    color: Colors.purple,
-                    width: 1.5 
-                   ),
-                ),
-
-                padding: EdgeInsets.all(10),
+                return Card(
+                  elevation: 10,
+                  margin: EdgeInsets.symmetric(vertical: 4,horizontal: 10),
+                child:ListTile(
+                  leading: CircleAvatar(
+                    radius: 30,
+                    child:
+                            Padding(
+                              padding: EdgeInsets.all(8),
+                            child:FittedBox(
+                            child:Text('₹${Transactions[index].amount}'),
+                            )
+                          ),
+                  ),
+              title: Text('${Transactions[index].title}',
+              style: Theme.of(context).textTheme.title,
               
-                child: Text('₹${Transactions[index].amount.toStringAsFixed(2)}' ,
-                  style: Theme.of(context).textTheme.title,
-                ),
+              ),
+              subtitle: Text(DateFormat.yMMMd().format(Transactions[index].date)),
+              
+              //deleting transaction
 
-                ),
+              trailing: IconButton(
+                icon: Icon(Icons.delete_outline),
+                color: Theme.of(context).errorColor,
+                onPressed: (){_deleteTransaction(Transactions[index].id);},
 
-                Column( 
-                  
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                  children: <Widget>[
-                  
-                  Text(Transactions[index].title , 
-                   style: Theme.of(context).textTheme.title,
-                   ),
-                  
-                  
-                  Text(
-                    DateFormat.yMd().add_jm().format(Transactions[index].date),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12
-                  ),
-                  ),
-
-                ],)
-
-                ],)
+              ),
+                )
                 );
-            },
-              
-          )
-    );
+            }
 
+            )
+            
+    );
+  
   }
 }

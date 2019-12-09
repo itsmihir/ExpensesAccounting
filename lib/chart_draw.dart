@@ -11,7 +11,10 @@ class chartDraw extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Text(label),
+      Container(
+      child:Text(label),
+      height: 17,
+      ),
       SizedBox(height: 4,),
 
       Container(
@@ -45,8 +48,12 @@ class chartDraw extends StatelessWidget {
         ),
 
       SizedBox(height: 4,),
-      Text('₹${totalAmount}'),
-    
+     Container(
+      height: 22,
+     child:FittedBox(
+      child:Text('₹${totalAmount}'),
+     ),
+     ),
       ],
     );
     

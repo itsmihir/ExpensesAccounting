@@ -24,14 +24,12 @@ class Chart extends StatelessWidget {
           }
        }
        
-      // print(DateFormat.E(weekDay));
-     //`   'amount': totalAmount,});
-      return {
+      return ({
         'day':DateFormat.E().format(weekDay).substring(0,1),
         'amount': totalAmount,
-      };
+      });
     }
-    );
+    ).reversed.toList();
   }
 
   double get totalSpend {
@@ -45,17 +43,25 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
    
      print(rowsList);
-   return Card(
+   return Padding(
+      padding:EdgeInsets.all(10),
+    child:Card(
      elevation: 1,
      child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
        children: rowsList.map((data)
        {
-         return chartDraw(data['day'],data['amount'],
-         totalSpend==0?0.0: (data['amount'] as double)/totalSpend);
+         return  Flexible(
+           fit: FlexFit.loose,
+         child:chartDraw(data['day'],data['amount'],
+         totalSpend==0?0.0: (data['amount'] as double)/totalSpend
+         )
+         );
        }).toList(),
        )
    // child: Text('${rowsList}'),
-    );
+    )
+   );
 
   }
 }

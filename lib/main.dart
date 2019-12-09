@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.light().textTheme.copyWith(
           title: TextStyle(
             fontSize: 18,
-            fontFamily: 'OpenSans',
+            fontWeight: FontWeight.bold,
+            fontFamily: 'QuickSand',
           )
         ),
 
@@ -51,14 +52,14 @@ class MyHomepage extends StatefulWidget {
 
 class _MyHomepageState extends State<MyHomepage> {
  
- void _add(double ammount , String title)
+ void _add(double ammount , String title ,DateTime date)
   {
     setState(() {
       Transactions.add(DataModel(
       id: Transactions.length.toString(),
       amount: ammount.toDouble(),
       title: title,
-      date: DateTime.now(),
+      date: date,
     )
     );
     
