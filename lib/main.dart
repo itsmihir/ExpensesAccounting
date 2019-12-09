@@ -11,6 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Expenses Accounting',
+
+      //styling the font 
       theme: ThemeData(
         primarySwatch: Colors.purple,
         fontFamily: 'QuickSand',
@@ -20,14 +22,13 @@ class MyApp extends StatelessWidget {
           title: TextStyle(
             fontSize: 18,
             fontFamily: 'OpenSans',
-
-          
           )
         ),
 
         //global appbar theme
         appBarTheme: AppBarTheme(
-              textTheme: ThemeData.light().textTheme.copyWith(title: TextStyle(
+              textTheme: ThemeData.light().textTheme.copyWith(
+              title: TextStyle(
               fontFamily: 'OpenSans',
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -36,6 +37,8 @@ class MyApp extends StatelessWidget {
         )
       ),
       
+      // end styling the font
+
       home:MyHomepage(),
     );
   }
@@ -98,7 +101,11 @@ class _MyHomepageState extends State<MyHomepage> {
     // )
   ];
 
-  
+  List<DataModel> get _recentTransactions {
+    return Transactions.where((tx){
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +128,7 @@ class _MyHomepageState extends State<MyHomepage> {
 
         children: <Widget>[
         
-        Chart(), // chart of last week data 
+        Chart(_recentTransactions), // chart of last week data 
         Data(Transactions),
        // newTransaction(), 
         ],
