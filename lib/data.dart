@@ -7,7 +7,9 @@ class Data extends StatefulWidget {
  
   final List<DataModel> Transactions;
 
-  Data(this.Transactions);
+  final _deleteTransaction;
+
+  Data(this.Transactions,this._deleteTransaction);
   @override
   _DataState createState() => _DataState(Transactions);
 }
@@ -17,22 +19,16 @@ class _DataState extends State<Data> {
 
   final List<DataModel> Transactions;
 
-  _DataState(this.Transactions);
 
-  void _deleteTransaction(String id)
-  {
-    setState(() {
-    Transactions.removeWhere((data){
-      return data.id==id;
-    });
-    
-    });
-    }
+
+  _DataState(this.Transactions);
 
   @override
   Widget build(BuildContext context) {
     return Transactions.length==0?
-    Column(children: <Widget>[
+    LayoutBuilder(builder: (ctx,constraints){
+
+      return Column(children: <Widget>[
       Text('No Transactions added yet!',
       style: Theme.of(context).textTheme.title,
       ),
@@ -40,14 +36,15 @@ class _DataState extends State<Data> {
       SizedBox(height: 20,), // to add space between text and the image
       
       Container(
-      height: 200,
+      height: constraints.maxHeight * 0.6,
       child:Image.asset('assets/images/waiting.png',fit: BoxFit.cover,),
       )
-    ],)
-      : 
-      Container(
-      height:450,
-      child:ListView.builder(
+    ],
+    );
+
+    },
+    )
+    : ListView.builder(
             itemCount: Transactions.length,
             itemBuilder: (context,index) {
                 return Card(
@@ -75,14 +72,14 @@ class _DataState extends State<Data> {
               trailing: IconButton(
                 icon: Icon(Icons.delete_outline),
                 color: Theme.of(context).errorColor,
-                onPressed: (){_deleteTransaction(Transactions[index].id);},
+                onPressed: (){widget._deleteTransaction(Transactions[index].id);},
 
               ),
                 )
                 );
             }
 
-            )
+            
             
     );
   

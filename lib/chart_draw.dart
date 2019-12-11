@@ -10,21 +10,25 @@ class chartDraw extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[
+    return  LayoutBuilder(
+      builder:(ctx, constraints){
+
+        return Column(children: <Widget>[
       Container(
       child:Text(label),
-      height: 17,
+      height: constraints.maxHeight * 0.15,
       ),
-      SizedBox(height: 4,),
-
+      SizedBox(height: constraints.maxHeight * 0.0015,),
+/***************************************************************************************************************************/
       Container(
-        height:60 ,
+        height:constraints.maxHeight * 0.65,
         width: 10,
 
         child: Stack(children: <Widget>[                                           // using stack to show the chart bar
        
-      /*1*/  Container(decoration: BoxDecoration(
-            border: Border.all(
+      /*1*/  Container(
+            decoration: BoxDecoration(
+             border: Border.all(
                 color: Colors.grey,
                 width: 1,
             ),
@@ -46,16 +50,19 @@ class chartDraw extends StatelessWidget {
 
         ],),
         ),
-
-      SizedBox(height: 4,),
+/****************************************************************************************************************************************/
+      SizedBox(height: constraints.maxHeight * 0.0015,),
      Container(
-      height: 22,
+      height: constraints.maxHeight*0.15,
      child:FittedBox(
       child:Text('₹${totalAmount}'),
      ),
      ),
       ],
     );
+    
+      });
+    
     
   }
 }

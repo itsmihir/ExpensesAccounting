@@ -45,32 +45,49 @@ class _InputState extends State<Input> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return LayoutBuilder(builder: (cxt,constraints)
+    {
+      return SingleChildScrollView(
+      child:Card(
       elevation: 12,
       child: Container(
       
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(
+        top: 10,
+        left: 10,
+        right: 10,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+      ),
 
       child:Column(
         
-       // crossAxisAlignment: CrossAxisAlignment.start,
 
         children: <Widget>[
-
-        TextField(decoration: InputDecoration(
+        
+        Container(
+          height: constraints.maxHeight * 0.20,
+          child:TextField(decoration: InputDecoration(
           labelText: 'Title',
           ),
           controller: titleInput,
-          ),
-        TextField(decoration: InputDecoration(
+        
+          )
+        ),
+
+        Container(
+          height: constraints.maxHeight * 0.20,
+        child:TextField(decoration: InputDecoration(
           labelText: 'Ammount'
         ),
         controller: ammountInput,
          keyboardType: TextInputType.number,
       
         ),
-        Padding(
-          padding:EdgeInsets.all(10),
+        ),
+        Container(
+          height: constraints.maxHeight * 0.25,
+        child:Padding(
+          padding:EdgeInsets.all(1),
         child:Row(children: <Widget>[
           Expanded(
          child: Text(inputDate==null?'No Date Selected':'Selected Date : ${DateFormat.yMd().format(inputDate)}'),
@@ -84,16 +101,25 @@ class _InputState extends State<Input> {
         ],
         ),
         ),
-        RaisedButton(
+        ),
+        Container(
+          height: constraints.maxHeight*0.1,
+        child:RaisedButton(
           color: Theme.of(context).primaryColor,
           child: Text('Add Transaction'),
           onPressed: submitData,
           textColor: Colors.white,
           )
-      ],
+        )
+       ],
       ),
-      ),
+      )
+      )
+      );
+    
+    },
     );
+    
 }
 }
 
